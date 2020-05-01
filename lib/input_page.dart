@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable.dart';
+import 'constants.dart';
 
-const bottomContainerHeight = 80.0;
-const containerColor = Color(0xFF1D1E33);
-const activeContainerColor = Color(0xFF111500);
 enum gender {
   male,
   female,
@@ -18,8 +16,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = containerColor;
-  Color femaleCardColor = containerColor;
+  Color maleCardColor = cContainerColor;
+  Color femaleCardColor = cContainerColor;
   bool genderToggle;
 
   @override
@@ -28,70 +26,72 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Column(children: <Widget>[
-        Expanded(
-          child: Row(children: <Widget>[
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
             Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedGender = gender.male;
-                    print('object');
-                  });
-                },
-                child: ReusableCode(
-                  colour: selectedGender == gender.male
-                      ? activeContainerColor
-                      : containerColor,
-                  cardChild: ReusableColumn(
-                    awesomeIcon: FontAwesomeIcons.mars,
-                    gender: 'MALE',
+              child: Row(children: <Widget>[
+                Expanded(
+                  child: ReusableCode(
+                    colour: selectedGender == gender.male
+                        ? cActiveContainerColor
+                        : cContainerColor,
+                    cardChild: ReusableColumn(
+                      awesomeIcon: FontAwesomeIcons.mars,
+                      gender: 'MALE',
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        selectedGender = gender.male;
+                      });
+                    },
                   ),
                 ),
-              ),
+                Expanded(
+                    child: ReusableCode(
+                  colour: selectedGender == gender.female
+                      ? cActiveContainerColor
+                      : cContainerColor,
+                  cardChild: ReusableColumn(
+                    awesomeIcon: FontAwesomeIcons.venus,
+                    gender: 'FEMALE',
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      selectedGender = gender.female;
+                    });
+                  },
+                ))
+              ]),
             ),
             Expanded(
-                child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedGender = gender.female;
-                  print('object');
-                });
-              },
               child: ReusableCode(
-                colour: selectedGender == gender.female
-                    ? activeContainerColor
-                    : containerColor,
-                cardChild: ReusableColumn(
-                  awesomeIcon: FontAwesomeIcons.venus,
-                  gender: 'FEMALE',
+                  colour: cContainerColor,
+                  cardChild: Text(
+                    'HEIGHT',
+                    style: cLabel,
+                    textAlign: TextAlign.center,
+                  )),
+            ),
+            Expanded(
+              child: Row(children: <Widget>[
+                Expanded(
+                  child: ReusableCode(
+                    colour: cContainerColor,
+                  ),
                 ),
-              ),
-            ))
-          ]),
-        ),
-        Expanded(
-          child: ReusableCode(colour: containerColor),
-        ),
-        Expanded(
-          child: Row(children: <Widget>[
-            Expanded(
-              child: ReusableCode(
-                colour: containerColor,
-              ),
+                Expanded(
+                  child: ReusableCode(colour: cContainerColor),
+                )
+              ]),
             ),
-            Expanded(
-              child: ReusableCode(colour: containerColor),
-            )
+            Container(
+              color: Color(0xFFEB1555),
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: cBottomContainerHeight,
+            ),
           ]),
-        ),
-        Container(
-          color: Color(0xFFEB1555),
-          margin: EdgeInsets.only(top: 10.0),
-          width: double.infinity,
-          height: bottomContainerHeight,
-        ),
-      ]),
     );
   }
 }
