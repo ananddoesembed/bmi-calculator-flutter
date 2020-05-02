@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable.dart';
@@ -19,6 +20,7 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColor = cContainerColor;
   Color femaleCardColor = cContainerColor;
   bool genderToggle;
+  int height = 121;
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +69,44 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: ReusableCode(
                   colour: cContainerColor,
-                  cardChild: Text(
-                    'HEIGHT',
-                    style: cLabel,
-                    textAlign: TextAlign.center,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[Text(
+                      'HEIGHT',
+                      style: cLabel,
+                      textAlign: TextAlign.center,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(height.toString(),style: TextStyle(fontSize: 50.0,fontWeight: FontWeight.w900),textAlign: TextAlign.center),
+                        Text('cm',style:TextStyle(fontSize: 20),textAlign: TextAlign.end,),
+                      ],
+                    ),
+                      SliderTheme(
+
+                        data: SliderTheme.of(context).copyWith(
+                          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                          thumbColor: Color(0xFFEB1555),
+                          activeTrackColor: Colors.white,
+                          overlayColor: Color(0x15EB1555),
+                        )
+                        ,
+                        child: Slider(
+                          value: height.toDouble(),
+                          min:120.0,
+                          max:220,
+                          onChanged:(double newValue){
+                                setState(() {
+                                  height = newValue.round();
+                                });
+                          } ,
+                        ),
+                      )],
+
                   )),
             ),
             Expanded(
