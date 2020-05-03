@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable.dart';
 import 'constants.dart';
+import 'screen2.dart';
+
 
 enum gender {
   male,
@@ -124,6 +126,7 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             FloatingActionButton(
+                              heroTag: 'poi',
                               onPressed: (){
                                 setState(() {
                                   age--;
@@ -136,6 +139,7 @@ class _InputPageState extends State<InputPage> {
                               width: 30.0,
                             ),
                             FloatingActionButton(
+                              heroTag: 'gnh',
                               onPressed: (){
                               setState(() {
                               age++;
@@ -159,6 +163,7 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             FloatingActionButton(
+                              heroTag: 'end',
                               onPressed: (){
                                 setState(() {
                                   weight--;
@@ -170,6 +175,7 @@ class _InputPageState extends State<InputPage> {
                             width: 30.0,
                             ),
                             FloatingActionButton(
+                              heroTag: 'two',
                               onPressed: (){
                                 setState(() {
                                   weight++;
@@ -184,24 +190,29 @@ class _InputPageState extends State<InputPage> {
                 )
               ]),
             ),
-            Container(
+           GestureDetector(
+              onTap: (){
 
-              color: Color(0xFFEB1555),
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: cBottomContainerHeight,
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                SizedBox(
-                height: 5.0,
-              ) ,
-                Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.w900,
-                fontSize: 50.0,
-                color: Colors.white,),textAlign: TextAlign.center,),],
+                Navigator.push(context,MaterialPageRoute(builder: (context)=> ScreenTwo()));
+              }, child: Container(
 
-              )
+                color: Color(0xFFEB1555),
+                margin: EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                height: cBottomContainerHeight,
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                  SizedBox(
+                  height: 5.0,
+                ) ,
+                  Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.w900,
+                  fontSize: 50.0,
+                  color: Colors.white,),textAlign: TextAlign.center,),],
 
+                )
+
+              ),
             ),
           ]),
     );
