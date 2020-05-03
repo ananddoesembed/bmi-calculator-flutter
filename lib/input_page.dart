@@ -21,7 +21,8 @@ class _InputPageState extends State<InputPage> {
   Color femaleCardColor = cContainerColor;
   bool genderToggle;
   int height = 121;
-
+  int age = 2;
+  int weight=10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +37,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCode(
                     colour: selectedGender == gender.male
-                        ? cActiveContainerColor
-                        : cContainerColor,
+                        ? cContainerColor
+                        : cActiveContainerColor,
                     cardChild: ReusableColumn(
                       awesomeIcon: FontAwesomeIcons.mars,
                       gender: 'MALE',
@@ -52,8 +53,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                     child: ReusableCode(
                   colour: selectedGender == gender.female
-                      ? cActiveContainerColor
-                      : cContainerColor,
+                      ? cContainerColor
+                      : cActiveContainerColor,
                   cardChild: ReusableColumn(
                     awesomeIcon: FontAwesomeIcons.venus,
                     gender: 'FEMALE',
@@ -114,18 +115,93 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCode(
                     colour: cContainerColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('AGE',style: cLabel,),
+                        Text(age.toString(),style: TextStyle(fontSize: 50.0,fontWeight: FontWeight.w900),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FloatingActionButton(
+                              onPressed: (){
+                                setState(() {
+                                  age--;
+                                  print('ob');
+                                });
+                              },
+                              backgroundColor:Colors.white12,
+                              child: Icon(Icons.remove,color: Colors.white,),),
+                            SizedBox(
+                              width: 30.0,
+                            ),
+                            FloatingActionButton(
+                              onPressed: (){
+                              setState(() {
+                              age++;
+                              });},
+                              backgroundColor:Colors.white12,
+                              child: Icon(Icons.add,color: Colors.white,),),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCode(colour: cContainerColor),
+                  child: ReusableCode(colour: cContainerColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('WEIGHT',style: cLabel,),
+                        Text(weight.toString(),style: TextStyle(fontSize: 50.0,fontWeight: FontWeight.w900),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FloatingActionButton(
+                              onPressed: (){
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                              backgroundColor:Colors.white12,
+                              child: Icon(Icons.remove,color: Colors.white,),),
+                            SizedBox(
+                            width: 30.0,
+                            ),
+                            FloatingActionButton(
+                              onPressed: (){
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                              backgroundColor:Colors.white12,
+                              child: Icon(Icons.add,color: Colors.white,),),
+                          ],
+                        )
+                      ],
+                    ),),
                 )
               ]),
             ),
             Container(
+
               color: Color(0xFFEB1555),
               margin: EdgeInsets.only(top: 10.0),
               width: double.infinity,
               height: cBottomContainerHeight,
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                SizedBox(
+                height: 5.0,
+              ) ,
+                Text('CALCULATE',style: TextStyle(fontWeight: FontWeight.w900,
+                fontSize: 50.0,
+                color: Colors.white,),textAlign: TextAlign.center,),],
+
+              )
+
             ),
           ]),
     );
